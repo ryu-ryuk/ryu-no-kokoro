@@ -1,15 +1,3 @@
 theme = "hugo-brewm"
 
 
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = false
-
-[slug]
-  mode = "default" # Ensures slugs are sanitized
-
-
-[permalinks]
-  tags = "/tags/:slug/"
-  categories = "/categories/:slug/"
