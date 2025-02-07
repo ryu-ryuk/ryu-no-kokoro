@@ -9,3 +9,7 @@ theme = "hugo-brewm"
 [slug]
   mode = "default" # Ensures slugs are sanitized
 
+
+[permalinks]
+  tags = "/tags/:slug/"
+  categories = "/categories/:slug/"
