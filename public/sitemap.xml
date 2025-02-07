@@ -2,27 +2,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/</loc>
+    <loc>/</loc>
     
     </url>
   <url>
-    <loc>//localhost:1313/tags/%23blog/</loc>
+    <loc>/tags/%23blog/</loc>
     
     </url>
   <url>
-    <loc>//localhost:1313/blog/1/</loc>
+    <loc>/blog/1/</loc>
     
     </url>
   <url>
-    <loc>//localhost:1313/blog/</loc>
+    <loc>/blog/post/1/</loc>
     
     </url>
   <url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>/blog/</loc>
     
     </url>
   <url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>/categories/</loc>
+    
+    </url>
+  <url>
+    <loc>/tags/</loc>
     
     </url>
 </urlset>
