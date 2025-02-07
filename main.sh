@@ -14,16 +14,22 @@ setup_config() {
     read -p "Enter the Git repository URL (e.g., https://github.com/your-username/your-repo.git): " myrepo
     echo "Saving the paths for you cutie~~~"
 
-    echo "sourcePath=$sourcePath" > "$CONFIG_FILE"
-    echo "destinationPath=$destinationPath" >> "$CONFIG_FILE"
-    echo "myrepo=$myrepo" >> "$CONFIG_FILE"
+    # Save paths and Git repo to the config file in INI format
+    {
+        echo "[Paths]"
+        echo "sourcePath=$sourcePath"
+        echo "destinationPath=$destinationPath"
+        echo ""
+        echo "[Git]"
+        echo "myrepo=$myrepo"
+    } > "$CONFIG_FILE"
 
     echo "Paths has been saved to $CONFIG_FILE , continuing..."
 }
 
 # Load paths from the config file
 if [ -f "$CONFIG_FILE" ]; then
-    source "$CONFIG_FILE"
+    source <(grep '=' "$CONFIG_FILE")  # Load key-value pairs into the shell environment
 else
     setup_config
 fi
@@ -50,6 +56,8 @@ else
     fi
 fi
 
+sleep 1
+
 # Step 2: Sync posts from Obsidian to Hugo content folder using rsync
 echo "Syncing posts from Obsidian..."
 
@@ -63,16 +71,19 @@ if [ ! -d "$destinationPath" ]; then
     exit 1
 fi
 
+
 rsync -av --delete "$sourcePath" "$destinationPath"
+sleep 2 
 
 # Step 3: Process Markdown files with Python script to handle image links
 echo "Processing image links in Markdown files..."
-if [ ! -f "image.py" ]; then
-    echo "Python script images.py not found."
+if [ ! -f "process_images.py" ]; then
+    echo "Python script process_images.py not found."
     exit 1
 fi
+sleep 1 
 
-if ! python3 image.py; then
+if ! python3 process_images.py; then
     echo "Failed to process image links."
     exit 1
 fi
@@ -103,7 +114,7 @@ fi
 
 # Step 7: Push all changes to the main branch
 echo "Deploying to GitHub Main..."
-if ! git push origin main; then
+if ! git push origin master; then
     echo "Failed to push to main branch."
     exit 1
 fi
